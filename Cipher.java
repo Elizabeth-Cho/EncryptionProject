@@ -1,4 +1,3 @@
-import java.awt.RenderingHints.Key;
 import java.util.HashMap;
 
 public class Cipher
@@ -25,7 +24,7 @@ public class Cipher
 		{
 			if (!mapping.containsKey(Character.valueOf(cipher.charAt(i))))
 			{
-				throw new InvalidFormatException;
+				throw new InvalidFormatException("Characters not in alphabet");
 			}
 			else
 			{

@@ -35,13 +35,13 @@ public class Message
 	    try {
 	        for (int i = 0; i < this.getMessage().length(); i++)
 	        {
-	            if (this.getMessage().charAt(i) == " ")
+	            if (String.valueOf(this.getMessage().charAt(i)).equals(" "))
 	            {
 	                nMsg = nMsg + " ";
 	            }
 	            else
 	            {
-	                nMsg = nMsg.this.cipher.getConversion(this.getMessage().charAt(i), this.isEncrypted);
+	                nMsg = this.cipher.getConversion(this.getMessage().charAt(i), this.isEncrypted);
 	            }
 	        }
 	        }

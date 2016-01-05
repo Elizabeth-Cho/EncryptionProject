@@ -7,6 +7,8 @@ public class Cipher
 	private String cipher;
 	private String nKey;
 	private String nAlpha;
+	private String eMsg;
+	private String dMsg;
 	
 	public Cipher(String nKey, String nAlpha)
 	{
@@ -46,5 +48,27 @@ public class Cipher
 			}
 		}
 		return cipher;
+	}
+	
+	public String encrypt()
+	{
+		HashMap<Character, Character> mapping = new HashMap<Character, Character>();
+		for (int i = 0; i < cipher.length(); i++)
+		{
+			mapping.put(Character.valueOf(cipher.charAt(i)), Character.valueOf(cipher.charAt(i)));
+		}
+		for (int i = 0; i < cipher.length(); i++)
+		{
+			String stringConversion = String.valueOf(mapping.get(Character.valueOf(cipher.charAt(i))));
+			
+		}
+		System.out.println("Mr. Horn is happy with your encryption!");
+		return eMsg;
+	}
+	
+	public String decrypt()
+	{
+		System.out.println("Mr. Horn is happy with your decryption!");
+		return dMsg;
 	}
 }

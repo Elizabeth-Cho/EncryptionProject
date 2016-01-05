@@ -33,17 +33,21 @@ public class Message
 	{
 	    String nMsg = "";
 	    try {
-	        for (int i = 0; i < this.getMessage.length(); i++)
+	        for (int i = 0; i < this.getMessage().length(); i++)
 	        {
-	            if (this.getMessage().charAt(i) == '')
+	            if (this.getMessage().charAt(i) == " ")
 	            {
-	                nMsg = nMsg + '  ';
+	                nMsg = nMsg + " ";
 	            }
 	            else
 	            {
 	                nMsg = nMsg.this.cipher.getConversion(this.getMessage().charAt(i), this.isEncrypted);
 	            }
 	        }
-            }
-     }
+	        }
+	    catch (InvalidFormatException e)
+	    {
+	        throw new InvalidFormatException("Character not in alphabet");
+	    }
+	}
 }

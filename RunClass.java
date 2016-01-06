@@ -30,50 +30,56 @@ public final class RunClass
 		}
 	}
 	
-	private static void secondLoop() throws InvalidFormatException
+	private static void secondLoop()
 	{
 		Scanner in = new Scanner(System.in);
 		int lContinue = CONTINUE;
 		while (lContinue == CONTINUE)
 		{
-			System.out.println("Input alphabet: ");
+			System.out.println("Enter the alphabet. ");
 			String nAlpha = in.nextLine().toLowerCase();
-			Alphabet alphabet = new Alphabet(nAlpha);
-			System.out.println("Input keyphrase: ");
+			Alphabet alpha = new Alphabet(nAlpha);
+			System.out.println("Enter the key." );
 			String nKey = in.nextLine().toLowerCase();
 			try
 			{
-				Cipher cipher = new Cipher(nKey, nAlpha);
-				System.out.println("Input message: ");
+				Key key = new Key(nKey, alpha);
+				Cipher cipher = new Cipher(key);
+				System.out.println("Enter the message.");
 				String nMsg = in.nextLine().toLowerCase();
-				int validInput = CONTINUE;
-				boolean encrypt = false;
-				while (validInput == CONTINUE)
+				int checkValidInput = CONTINUE;
+				boolean encrypted = false;
+				while (checkValidInput == CONTINUE)
 				{
-					System.out.println("Encrypted? ");
-					String isEncrypt = in.nextLine().toLowerCase();
-					if(isEncrypt.equals("y"))
+					System.out.println("Is the message encrypted?");
+					String nEncrypt = in.nextLine().toLowerCase();
+					if (nEncrypt.equals("y"))
 					{
-						encrypt = true;
-						validInput = STOP;
+						encrypted = true;
+						checkValidInput = STOP;
 					}
-					else if(isEncrypt.equals("n"))
+					else if (nEncrypt.equals("n"))
 					{
-						validInput = STOP;
+						checkValidInput = STOP;
 					}
 					else
 					{
-						System.out.println("Invalid input.");
+						System.out.println("Enter Y or N.");
 					}
 				}
-				Message message = new Message(encrypt, nMsg);
+				Message message = new Message(encrypted, nMsg);
 				thirdLoop(message);
 			}
 			catch (InvalidFormatException e)
 			{
-				if (e.getMessage().equals("Message"))
+				System.out.println(e.getMessage());
+				if (e.getMessage().equals("Character not in alphabet"))
 				{
-					System.out.println("Characters not in alphabet.");
+					System.out.println("Message contains characters not in alphabet.");
+				}
+				else
+				{
+					System.out.println("Key contains characters not in alphabet");
 				}
 			}
 			lContinue = STOP;

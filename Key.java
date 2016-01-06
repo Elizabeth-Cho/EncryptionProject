@@ -1,11 +1,11 @@
 import java.util.HashMap;
 
-public class Key
+public class Key implements KeyInterface
 {
 	private String key;
-	private Alphabet alpha;
+	private AlphabetInterface alpha;
 	
-	public Key(String nKeyphrase, Alphabet nAlphabet) throws InvalidFormatException
+	public Key(String nKeyphrase, AlphabetInterface nAlphabet) throws InvalidFormatException
 	{
 		try
 		{
@@ -23,7 +23,7 @@ public class Key
 		return this.key;
 	}
 	
-	public Alphabet getAlphabet()
+	public AlphabetInterface getAlphabet()
 	{
 		return this.alpha;
 	}
@@ -52,6 +52,7 @@ public class Key
 		{
 			mapping.put(Character.valueOf(stringAlpha().charAt(i)), Integer.valueOf(0));
 		}
+		
 		for (int i = s.length() - 1; i >= 0; i--)
 		{
 			if (!mapping.containsKey(Character.valueOf(s.charAt(i))))

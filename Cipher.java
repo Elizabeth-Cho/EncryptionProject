@@ -43,7 +43,7 @@ public class Cipher implements CipherInterface
 	private String getKeyCipher() throws InvalidFormatException
 	{
 		Key kCipher = new Key(this.getKeyString() + this.getAlpha(), this.getAlphabet());
-		return kCipher.toString();
+		return kCipher.getString();
 	}
 	
 	public void test()
@@ -62,7 +62,7 @@ public class Cipher implements CipherInterface
 	
 	private String getAlphabetString()
 	{
-        return this.getAlphabet().toString();
+        return this.getAlphabet().toStringAlpha();
     }
 	
 	private AlphabetInterface getAlphabet()

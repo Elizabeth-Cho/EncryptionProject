@@ -15,6 +15,11 @@ public class Alphabet
 		return this.alphabet.toString();
 	}
 	
+	public String getAlphabet()
+	{
+		return alphabet;
+	}
+	
 	private void removeDuplicatesAlpha()
 	{
 		HashMap<Character, Integer> mapping = new HashMap<Character, Integer>();

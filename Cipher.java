@@ -9,6 +9,7 @@ public class Cipher
 	
 	public Cipher(Key nKey) throws InvalidFormatException
 	{
+		key = nKey;
 		dCipher = new HashMap <Character, Character>();
 		eCipher = new HashMap <Character, Character>();
 		try
@@ -17,15 +18,16 @@ public class Cipher
 		}
 		catch (InvalidFormatException e)
 		{
-			throw new InvalidFormatException("Characters not in alphabet");
+			throw new InvalidFormatException("Cipher");
 		}
 	}
+	
 	
 	public void setCipher() throws InvalidFormatException
 	{
 		try
 		{
-			for (int i = 0; i < key.toString().length(); i++)
+			for (int i = 0; i < this.getKeyCipher().length(); i++)
 			{
 				this.eCipher.put(Character.valueOf((alphabet.toStringAlpha().charAt(i))),
 						Character.valueOf(this.getKeyCipher().charAt(i)));
@@ -35,15 +37,29 @@ public class Cipher
 		}
 		catch (InvalidFormatException e)
 		{
-			throw new InvalidFormatException("Characters not in alphabet");
+			throw new InvalidFormatException("Cipher");
 		}
 	}
 	
 	private String getKeyCipher() throws InvalidFormatException
 	{
-		Key kCipher = new Key(key.toString(), alphabet);
+		Key kCipher = new Key(this.getKeyString() + this.getAlpha(), alphabet);
 		return kCipher.toString();
 	}
+	
+	private String getAlpha()
+	{
+		return this.key.getAlphabet().toString();
+	}
+	private String getKeyString()
+	{
+        return this.key.getString();
+    }
+	
+	private String getAlphabetString()
+	{
+        return alphabet.getAlphabet().toString();
+    }
 	
 	public char getConversion(char c, boolean encrypt) throws InvalidFormatException
 	{
@@ -60,34 +76,7 @@ public class Cipher
 		}
 		catch (NullPointerException e)
 		{
-			throw new InvalidFormatException("Characters not in alphabet");
+			throw new InvalidFormatException("Cipher");
 		}
 	}
-	/*private String removeDuplicatesCipher()
-	{
-		HashMap<Character, Integer> mapping = new HashMap<Character, Integer>();
-		for (int i = 0; i < cipher.length(); i++)
-		{
-			mapping.put(Character.valueOf(cipher.charAt(i)), Integer.valueOf(0));
-		}
-		for (int i = 0; i < cipher.length(); i++)
-		{
-			int intConversion = mapping.get(Character.valueOf(cipher.charAt(i)));
-			intConversion++;
-			Integer newValue = Integer.valueOf(intConversion);
-			mapping.put(Character.valueOf(cipher.charAt(i)), newValue);
-		}
-		for (int i = 0; i < cipher.length(); i++)
-		{
-			if (mapping.get(Character.valueOf(cipher.charAt(i))) > 1)
-			{
-				int intConversion = mapping.get(Character.valueOf(cipher.charAt(i))).intValue();
-				intConversion--;
-				Integer newValue = Integer.valueOf(intConversion);
-				mapping.put(Character.valueOf(cipher.charAt(i)), newValue);
-				cipher = cipher.substring(0, i) + cipher.substring(i + 1);
-			}
-		}
-		return cipher;
-	}*/
 }

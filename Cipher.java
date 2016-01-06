@@ -1,13 +1,12 @@
 import java.util.HashMap;
 
-public class Cipher
+public class Cipher implements CipherInterface
 {
-	private Key key;
-	private Alphabet alphabet;
+	private KeyInterface key;
 	private HashMap <Character, Character> dCipher;
 	private HashMap <Character, Character> eCipher;
 	
-	public Cipher(Key nKey) throws InvalidFormatException
+	public Cipher(KeyInterface nKey) throws InvalidFormatException
 	{
 		key = nKey;
 		dCipher = new HashMap <Character, Character>();
@@ -18,7 +17,7 @@ public class Cipher
 		}
 		catch (InvalidFormatException e)
 		{
-			throw new InvalidFormatException("Cipher");
+			throw new InvalidFormatException("Cipher1");
 		}
 	}
 	
@@ -29,27 +28,32 @@ public class Cipher
 		{
 			for (int i = 0; i < this.getKeyCipher().length(); i++)
 			{
-				this.eCipher.put(Character.valueOf((alphabet.toStringAlpha().charAt(i))),
+				this.eCipher.put(Character.valueOf((this.getAlphabetString().charAt(i))),
 						Character.valueOf(this.getKeyCipher().charAt(i)));
 	            this.dCipher.put(Character.valueOf(this.getKeyCipher().charAt(i)),
-	                    Character.valueOf(alphabet.toStringAlpha().charAt(i)));
+	                    Character.valueOf(this.getAlphabetString().charAt(i)));
 	        }
 		}
 		catch (InvalidFormatException e)
 		{
-			throw new InvalidFormatException("Cipher");
+			throw new InvalidFormatException("Cipher2");
 		}
 	}
 	
 	private String getKeyCipher() throws InvalidFormatException
 	{
-		Key kCipher = new Key(this.getKeyString() + this.getAlpha(), alphabet);
+		Key kCipher = new Key(this.getKeyString() + this.getAlpha(), this.getAlphabet());
 		return kCipher.toString();
+	}
+	
+	public void test()
+	{
+		this.getAlpha();
 	}
 	
 	private String getAlpha()
 	{
-		return this.key.getAlphabet().toString();
+		return this.key.getAlphabet().toStringAlpha();
 	}
 	private String getKeyString()
 	{
@@ -58,8 +62,13 @@ public class Cipher
 	
 	private String getAlphabetString()
 	{
-        return alphabet.getAlphabet().toString();
+        return this.getAlphabet().toString();
     }
+	
+	private AlphabetInterface getAlphabet()
+	{
+		return this.key.getAlphabet();
+	}
 	
 	public char getConversion(char c, boolean encrypt) throws InvalidFormatException
 	{
@@ -76,7 +85,7 @@ public class Cipher
 		}
 		catch (NullPointerException e)
 		{
-			throw new InvalidFormatException("Cipher");
+			throw new InvalidFormatException("Cipher3");
 		}
 	}
 }

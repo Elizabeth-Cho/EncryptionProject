@@ -2,40 +2,35 @@ import java.util.HashMap;
 
 public class Key
 {
-	private String keyphrase;
-	private Alphabet alphabet;
+	private String key;
+	private Alphabet alpha;
 	
 	public Key(String nKeyphrase, Alphabet nAlphabet) throws InvalidFormatException
 	{
 		try
 		{
-			keyphrase = this.removeDuplicates(nKeyphrase);
-			alphabet = nAlphabet;
+			alpha = nAlphabet;
+			key = this.removeDuplicates(nKeyphrase);
 		}
 		catch (InvalidFormatException e)
 		{
-			throw new InvalidFormatException("Character not in alphabet");
+			throw new InvalidFormatException("Key");
 		}
 	}
 	
-	public String toString()
+	public String getString()
 	{
-		return this.keyphrase;
+		return this.key;
 	}
 	
 	public Alphabet getAlphabet()
 	{
-		return this.alphabet;
+		return this.alpha;
 	}
 	
 	public void setAlphabet(Alphabet nAlpha)
 	{
-		this.alphabet = nAlpha;
-	}
-	
-	public String stringAlpha()
-	{
-		return this.alphabet.toString();
+		this.alpha = nAlpha;
 	}
 	
 	public void setKey(String nKeyphrase) throws InvalidFormatException
@@ -46,7 +41,7 @@ public class Key
 		}
 		catch (InvalidFormatException e)
 		{
-			throw new InvalidFormatException("Character not in alphabet");
+			throw new InvalidFormatException("Key");
 		}
 				
 	}
@@ -61,7 +56,7 @@ public class Key
 		{
 			if (!mapping.containsKey(Character.valueOf(s.charAt(i))))
 			{
-				throw new InvalidFormatException("Character not in alphabet");
+				throw new InvalidFormatException("Key");
 			}
 			else
 			{
@@ -84,5 +79,11 @@ public class Key
 		}
 		return s;
 	}
+	
+	public String stringAlpha()
+	{
+		return alpha.toStringAlpha();
+	}
+	
 	
 }

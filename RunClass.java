@@ -67,7 +67,7 @@ public final class RunClass
 						System.out.println("Enter Y or N.");
 					}
 				}
-				Message message = new Message(encrypted, nMsg);
+				Message message = new Message(encrypted, nMsg, cipher);
 				thirdLoop(message);
 			}
 			catch (InvalidFormatException e)

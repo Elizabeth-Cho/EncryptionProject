@@ -2,14 +2,13 @@
 public class Message
 {
 	private boolean encrypt;
-	private String message;
 	private String eMsg;
 	private String dMsg;
+	private Cipher cipher;
 	
 	public Message (boolean isEncrypt, String nMsg) throws InvalidFormatException
 	{
 		encrypt = isEncrypt;
-		message = nMsg;
 		if (this.encrypt)
 		{
 			eMsg = nMsg;
@@ -26,8 +25,16 @@ public class Message
 	
 	public String getMessage()
 	{
-		return message;
+		if (this.encrypt)
+		{
+			return eMsg;
+		}
+		else
+		{
+			return dMsg;
+		}
 	}
+	
 	
 	private void encryptDecrypt() throws InvalidFormatException
 	{
@@ -41,13 +48,21 @@ public class Message
 	            }
 	            else
 	            {
-	                nMsg = this.cipher.getConversion(this.getMessage().charAt(i), this.isEncrypted);
+	                nMsg = nMsg + this.cipher.getConversion(this.getMessage().charAt(i), this.encrypt);
 	            }
 	        }
 	        }
 	    catch (InvalidFormatException e)
 	    {
-	        throw new InvalidFormatException("Character not in alphabet");
+	        throw new InvalidFormatException("Message");
+	    }
+	    if (encrypt)
+	    {
+	    	this.dMsg = nMsg;
+	    }
+	    else
+	    {
+	    	this.eMsg = nMsg;
 	    }
 	}
 }

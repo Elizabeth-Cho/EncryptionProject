@@ -73,7 +73,7 @@ public final class RunClass
 			catch (InvalidFormatException e)
 			{
 				System.out.println(e.getMessage());
-				if (e.getMessage().equals("Character not in alphabet"))
+				if (e.getMessage().equals("Message"))
 				{
 					System.out.println("Message contains characters not in alphabet.");
 				}
@@ -86,7 +86,7 @@ public final class RunClass
 		}
 	}
 	
-	private static void thirdLoop(Message nMsg)
+	private static void thirdLoop(Message nMsg) throws InvalidFormatException
 	{
 		Scanner in = new Scanner(System.in);
 		int lContinue = CONTINUE;
@@ -98,10 +98,12 @@ public final class RunClass
 			String nChoice = in.nextLine();
 			if (nChoice.equals("1"))
 			{
+				nMsg.setEncrypt(true);
 				System.out.println("Encrypted message: " + nMsg.getMessage());
 			}
 			else if(nChoice.equals("2"))
 			{
+				nMsg.setEncrypt(false);
 				System.out.println("Decrypted message: " + nMsg.getMessage());
 			}
 			else if (nChoice.equals("3"))

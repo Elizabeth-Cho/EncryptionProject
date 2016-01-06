@@ -1,5 +1,5 @@
 
-public class Message
+public class Message implements MessageInterface
 {
 	private boolean encrypt;
 	private String eMsg;
@@ -17,6 +17,7 @@ public class Message
 		{
 			dMsg = nMsg;
 		}
+		this.encryptDecrypt();
 	}
 	public boolean getEncrypt()
 	{
@@ -35,8 +36,12 @@ public class Message
 		}
 	}
 	
+	public void setEncrypt(boolean isEncrypt)
+	{
+		encrypt = isEncrypt;
+	}
 	
-	private void encryptDecrypt() throws InvalidFormatException
+	public void encryptDecrypt() throws InvalidFormatException
 	{
 	    String nMsg = "";
 	    try {
@@ -48,7 +53,10 @@ public class Message
 	            }
 	            else
 	            {
-	                nMsg = nMsg + this.cipher.getConversion(this.getMessage().charAt(i), this.encrypt);
+	                System.out.println(this.getMessage().charAt(i));
+	                System.out.println(this.encrypt);
+	                System.out.println(this.cipher.getConversion(this.getMessage().charAt(i), this.encrypt));
+	            	nMsg = nMsg + this.cipher.getConversion(this.getMessage().charAt(i), this.encrypt);
 	            }
 	        }
 	        }

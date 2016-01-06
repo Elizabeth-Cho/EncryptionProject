@@ -1,6 +1,6 @@
 import java.util.HashMap;
 
-public class Alphabet
+public class Alphabet implements AlphabetInterface
 {
 	private String alphabet;
 	

@@ -3,20 +3,59 @@ import java.util.HashMap;
 public class Key
 {
 	private String keyphrase;
-	private String alphabet;
+	private Alphabet alphabet;
 	
-	public Key(String nKeyphrase, String nAlphabet)
+	public Key(String nKeyphrase, Alphabet nAlphabet) throws InvalidFormatException
 	{
-		keyphrase = nKeyphrase;
-		alphabet = nAlphabet;
+		try
+		{
+			keyphrase = this.removeDuplicates(nKeyphrase);
+			alphabet = nAlphabet;
+		}
+		catch (InvalidFormatException e)
+		{
+			throw new InvalidFormatException("Character not in alphabet");
+		}
 	}
 	
+	public String toString()
+	{
+		return this.keyphrase;
+	}
+	
+	public Alphabet getAlphabet()
+	{
+		return this.alphabet;
+	}
+	
+	public void setAlphabet(Alphabet nAlpha)
+	{
+		this.alphabet = nAlpha;
+	}
+	
+	public String stringAlpha()
+	{
+		return this.alphabet.toString();
+	}
+	
+	public void setKey(String nKeyphrase) throws InvalidFormatException
+	{
+		try
+		{
+			this.removeDuplicates(nKeyphrase);
+		}
+		catch (InvalidFormatException e)
+		{
+			throw new InvalidFormatException("Character not in alphabet");
+		}
+				
+	}
 	public String removeDuplicates(String s) throws InvalidFormatException
 	{
 		HashMap<Character, Integer> mapping = new HashMap<Character, Integer>();
-		for (int i = 0; i < alphabet.length(); i++)
+		for (int i = 0; i < stringAlpha().length(); i++)
 		{
-			mapping.put(Character.valueOf(alphabet.charAt(i)), Integer.valueOf(0));
+			mapping.put(Character.valueOf(stringAlpha().charAt(i)), Integer.valueOf(0));
 		}
 		for (int i = s.length() - 1; i >= 0; i--)
 		{
@@ -46,8 +85,4 @@ public class Key
 		return s;
 	}
 	
-	public String toString()
-	{
-		return this.keyphrase;
-	}
 }

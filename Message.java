@@ -6,8 +6,9 @@ public class Message implements MessageInterface
 	private String dMsg;
 	private Cipher cipher;
 	
-	public Message (boolean isEncrypt, String nMsg) throws InvalidFormatException
+	public Message (boolean isEncrypt, String nMsg, Cipher cipher) throws InvalidFormatException
 	{
+                this.cipher = cipher;
 		encrypt = isEncrypt;
 		if (this.encrypt)
 		{
@@ -53,9 +54,6 @@ public class Message implements MessageInterface
 	            }
 	            else
 	            {
-	                System.out.println(this.getMessage().charAt(i));
-	                System.out.println(this.encrypt);
-	                System.out.println(this.cipher.getConversion(this.getMessage().charAt(i), this.encrypt));
 	            	nMsg = nMsg + this.cipher.getConversion(this.getMessage().charAt(i), this.encrypt);
 	            }
 	        }
